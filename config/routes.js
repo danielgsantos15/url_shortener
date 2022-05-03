@@ -3,6 +3,7 @@ const router = express.Router()
 const validUrl = require('valid-url')
 const regex = require('regex')
 const match = require('nodemon/lib/monitor/match')
+const Link = require('../models/link.js')
 
 router.get('/', (req, res) => {
     if(validUrl.isUri(req.headers.url)){
@@ -24,11 +25,15 @@ function generateUrl() {
 }
 generateUrl()
 
-router.post('/new', (req, res) => {
+router.post('/new', async (req, res) => {
     const url = req.body.url
     const code = generateUrl()
-    res.send('http://localhost:3000/' + code)
-    console.log('http://localhost:3000/' + code)
+
+    const resultado = await Link.create({
+        url,
+        code
+    })
+    res.send(resultado)
 })
 
 module.exports = router
