@@ -1,6 +1,6 @@
 (async () => {
-  const database = require('./db')
-  const Link = require('./models/link')
+  const database = require('../config/db')
+  const Link = require('../models/link')
 
   await database.sync()
 
@@ -8,7 +8,7 @@
   const morgan = require('morgan')
   const cors = require('cors')
   const bodyParser = require('body-parser')
-  const router = require('./config/routes')
+  const router = require('../../config/routes')
   const app = express()
 
   app.use(morgan('dev'))
