@@ -3,7 +3,7 @@ const router = express.Router()
 const validUrl = require('valid-url')
 const regex = require('regex')
 const match = require('nodemon/lib/monitor/match')
-const Link = require('../src/models/link.js')
+const Link = require('../models/link.js')
 
 router.get('/:code', async (req, res) => {
   const code = req.params.code
