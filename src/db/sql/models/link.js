@@ -1,9 +1,9 @@
 const Sequelize = require('sequelize')
-const database = require('../db')
+const database = require('../index')
 
 const Link = database.define('link', {
   id: {
-    type: Sequelize.INTEGER.UNSIGNED,
+    type: Sequelize.INTEGER,
     auroIncrement: true,
     aloowNull: false,
     primaryKey: true
@@ -17,7 +17,7 @@ const Link = database.define('link', {
     allowNull: false
   },
   hits: {
-    type: Sequelize.INTEGER.UNSIGNED,
+    type: Sequelize.INTEGER,
     allowNull: true,
     defaultValue: 0
   }

@@ -1,8 +1,4 @@
-(async () => {
-  const database = require('../db/sql/db')
-
-  await database.sync()
-
+(() => {
   const express = require('express')
   const morgan = require('morgan')
   const cors = require('cors')
@@ -17,6 +13,6 @@
   app.use(router)
 
   app.listen(3000, () => {
-    console.log('Express started at http://localhost:3000')
+    console.log('Servidor rodando em http://localhost:3000')
   })
 })()

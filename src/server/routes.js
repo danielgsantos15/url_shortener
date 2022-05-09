@@ -4,7 +4,7 @@ const validUrl = require('valid-url')
 const Link = require('../db/sql/models/link.js')
 
 router.get('/:code', async (req, res) => {
-  const code = req.params.code
+  const { code } = req.params
 
   const resultado = await Link.findOne({ where: { code } })
   if (!resultado) return res.sendStatus(404)
