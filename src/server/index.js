@@ -1,6 +1,6 @@
 (async () => {
-  const database = require('../config/db')
-  const Link = require('../models/link')
+  const database = require('../db/sql/db')
+  const Link = require('../db/sql/models/link')
 
   await database.sync()
 
