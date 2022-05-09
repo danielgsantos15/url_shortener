@@ -1,8 +1,6 @@
 const express = require('express')
 const router = express.Router()
 const validUrl = require('valid-url')
-const regex = require('regex')
-const match = require('nodemon/lib/monitor/match')
 const Link = require('../db/sql/models/link.js')
 
 router.get('/:code', async (req, res) => {
@@ -19,19 +17,19 @@ router.get('/:code', async (req, res) => {
 router.get('/', (req, res) => {
   if (validUrl.isUri(req.headers.url)) {
     console.log(req.headers.url)
-  }
-  else {
+  } else {
     console.log('Not a URL')
   }
   res.header(201)
   res.end()
 })
 
-function generateUrl() {
+function generateUrl () {
   let text = ''
   const possible = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789'
-  for (let i = 0; i < 5; i++)
+  for (let i = 0; i < 5; i++) {
     text += possible.charAt(Math.floor(Math.random() * possible.length))
+  }
   return text
 }
 generateUrl()
