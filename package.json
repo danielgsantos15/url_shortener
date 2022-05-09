@@ -20,5 +20,9 @@
     "sqlite3": "^5.0.6",
     "url": "^0.11.0",
     "valid-url": "^1.0.9"
+  },
+  "devDependencies": {
+    "eslint": "^8.15.0",
+    "standard": "^17.0.0"
   }
 }
