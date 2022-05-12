@@ -1,13 +1,14 @@
 const express = require('express')
 const router = express.Router()
-const validUrl = require('valid-url')
 const Link = require('../db/sql/models/link.js')
+const generator = require('./url-generator')
+const validate = require('./validations')
 
 router.get('/:code', async (req, res) => {
   const { code } = req.params
-
   const resultado = await Link.findOne({ where: { code } })
-  if (!resultado) return res.sendStatus(404)
+
+  res.sendStatus(validate.resultValid())
 
   await resultado.save()
 
@@ -15,28 +16,13 @@ router.get('/:code', async (req, res) => {
 })
 
 router.get('/', (req, res) => {
-  if (validUrl.isUri(req.headers.url)) {
-    console.log(req.headers.url)
-  } else {
-    console.log('Not a URL')
-  }
-  res.header(201)
+  res.header(validate.validate(req.headers.url))
   res.end()
 })
 
-function generateUrl () {
-  let text = ''
-  const possible = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789'
-  for (let i = 0; i < 5; i++) {
-    text += possible.charAt(Math.floor(Math.random() * possible.length))
-  }
-  return text
-}
-generateUrl()
-
 router.post('/new', async (req, res) => {
   const url = req.body.url
-  const code = generateUrl()
+  const code = generator.generateUrl()
   console.log(code)
 
   const resultado = await Link.create({
